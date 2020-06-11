@@ -1,5 +1,12 @@
 # TripletGAn
 
+## Setup
+
+- **pytorch==1.5.0**
+- **torchvision==0.6.0**
+- matplotlib
+- scikit-learn 
+
 ## Usage
 
 * notebooks/tain_triplet_gan_experiment.ipynb: a note that contains the a working training code for TripletGan and its evaluation using K-NN
