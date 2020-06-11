@@ -1,11 +1,17 @@
 # TripletGAN
 
+Implementation of the paper [Training Triplet Networks with GAN](https://arxiv.org/abs/1704.02227)
+
 ## Setup
 
+The code is dependent on the following packages:
 - **pytorch==1.5.0**
 - **torchvision==0.6.0**
 - matplotlib
 - scikit-learn 
+
+One can use the docker image from `pytorch/pytorch:1.5-cuda10.1-cudnn7-devel` to run this code.
+
 
 ## Usage
 
@@ -81,30 +87,6 @@ The accuracy I found is considerably higher than what was reported in the paper.
 But the good thing is the accuracy follows the intuition of increasing when we go from m=16 to m=32 and from N=100 to N=200.
 
 
-## Things tried
-
-Even after trying a lot of hyperparameter tuning and ways of training a vanilla GAN(with linear layers), I wasn't able to get the model to train properly. What a tried with Vanilla GAN:
-
-- adding normal noise to the input of discriminator 
-- making positive labels between 1.2 and 0.8 and negative labels between 0.0 and 0.3
-- BatchNorm
-- Dropout
-- LeakyReLU
-- weight normalization of the last layer of the generator and all layers of the discriminator 
-- Normalization of image inputs
-- Increasing and decreasing number of units in linear layers
-- SGD for Discriminator and different learning rate
-
-Hence, I shifted to** DCGAN! **
-
-With DCGAN, I implemented all of the above things by default and I tried the following loss functions while training the TripletFAN
-
-- Triplet Margin Loss + HingeLoss + Hinge Loss: didn't work
-- Triplet Margin Loss + HingeLoss + feature matching loss: didn't work
-- Triplet Margin Loss + f_discriminator_unsupervised_loss + feature matching: worked nicely
-- Triplet Loss as in paper  + f_discriminator_unsupervised_loss + feature matching loss: worked nicely 
-
-
 ## References: 
 
 - For DCGAN (the basic template of this code was taken from here)
@@ -115,3 +97,22 @@ With DCGAN, I implemented all of the above things by default and I tried the fol
 - For details related to the paper:
     - https://github.com/maciejzieba/tripletGAN
     - https://arxiv.org/pdf/1704.02227.pdf
+ 
+ ## Citation
+ 
+ ```
+ @article{DBLP:journals/corr/ZiebaW17,
+  author    = {Maciej Zieba and
+               Lei Wang},
+  title     = {Training Triplet Networks with {GAN}},
+  journal   = {CoRR},
+  volume    = {abs/1704.02227},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.02227},
+  archivePrefix = {arXiv},
+  eprint    = {1704.02227},
+  timestamp = {Tue, 02 Apr 2019 14:45:28 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/ZiebaW17.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
