@@ -4,27 +4,47 @@ Implementation of the paper [Training Triplet Networks with GAN](https://arxiv.o
 
 ## Setup
 
-The code is dependent on the following packages:
+The code is dependent on the following major packages.
 - **pytorch==1.5.0**
 - **torchvision==0.6.0**
 - matplotlib
 - scikit-learn 
 
-One can use the docker image from `pytorch/pytorch:1.5-cuda10.1-cudnn7-devel` to run this code.
+One can also use the image from `nvcr.io/nvidia/pytorch:19.10-py3` to run this code.
+A `pip freeze` of our dependencies can be found in `requirements.txt`. 
 
 
-## Usage
+## Files
 
-* `notebooks/tain_triplet_gan_experiment.ipynb`: a note that contains the a working training code for TripletGan and its evaluation using K-NN
-* `src/dataset.py`: create triplet dataset
-* `src/losses.py`: various loss functions like Triplet Loss(as per in the paper), Unsupervised Discriminator loss, Feature Matching loss
-* `src/model.py`: contains the model code for Generator and Discriminator. 
-* `src/train.py`: contains a template code for training a triplet gan and loading dataset
-* `src/data`: contains various checkpoints of the model
+* `notebooks/tain_triplet_gan_experiment.ipynb`: a notebook that contains the a working training code for TripletGAN and its evaluation using K-NN. This is the recommended method for using this code.
+* `src/dataset.py`: Pytorch Dataset for creating a Triplet MNIST dataset.
+* `src/losses.py`: various loss functions like Triplet Loss(as per in the paper), Unsupervised Discriminator loss, Feature Matching loss.
+* `src/model.py`: the model code for Generator and Discriminator. 
+* `src/train.py`: a template code for training the TripletGAN and loading dataset
 
-## Some results
+## Results
 
-Each model has been trained for **50 epochs** where **each epoch had exactly 60,000 randomly selected triplets**
+
+###  Training Loss
+![fake1](images/loss.png)
+
+### Generated Images
+
+![fake1](images/fake_1.png)
+![fake2](images/fake_2.png)
+
+### T-SNE of feature vector of the discriminator
+
+![tnse1](images/tnse_1.png)
+![tnse2](images/tnse_2.png)
+
+
+### K-NN evaluation
+
+Each model has been trained for **50 epochs** where **each epoch had exactly 60,000 randomly selected triplets**.    
+The table below shows the performance of classification on test dataset of MNIST using a KNeighborsClassifier with `k = 9`.  
+`N` is the number of training examples used from for training the 9-NN.    
+`m` is the size of feature vector produced by the discriminator. 
 
 <table>
   <tr>
@@ -82,7 +102,7 @@ Each model has been trained for **50 epochs** where **each epoch had exactly 60,
 </table>
 
 
-The accuracy I found is considerably higher than what was reported in the paper. A possible reason for it might be that they trained there GAN only use 100 labeled examples from the training set whereas I used all of the training examples.
+The accuracy I found is considerably higher than what was reported in the paper. A possible reason for it might be that they trained there GAN only use 100 labeled examples from the training set whereas I used all of the training examples. 
 
 But the good thing is the accuracy follows the intuition of increasing when we go from m=16 to m=32 and from N=100 to N=200.
 
