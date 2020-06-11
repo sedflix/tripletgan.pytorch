@@ -1,4 +1,4 @@
-# TripletGAn
+# TripletGAN
 
 ## Setup
 
@@ -9,12 +9,12 @@
 
 ## Usage
 
-* notebooks/tain_triplet_gan_experiment.ipynb: a note that contains the a working training code for TripletGan and its evaluation using K-NN
-* src/dataset.py: on how to create triplet dataset
-* src/losses.py: various loss functions like Triplet Loss(as per in the paper), Unsupervised Discriminator loss, Feature Matching loss
-* src/model.py: contains the model code for Generator and Discriminator. 
-* src/train.py: contains a template code for training a triplet gan and loading dataset
-* src/data: contains various checkpoints of the model
+* `notebooks/tain_triplet_gan_experiment.ipynb`: a note that contains the a working training code for TripletGan and its evaluation using K-NN
+* `src/dataset.py`: create triplet dataset
+* `src/losses.py`: various loss functions like Triplet Loss(as per in the paper), Unsupervised Discriminator loss, Feature Matching loss
+* `src/model.py`: contains the model code for Generator and Discriminator. 
+* `src/train.py`: contains a template code for training a triplet gan and loading dataset
+* `src/data`: contains various checkpoints of the model
 
 ## Some results
 
